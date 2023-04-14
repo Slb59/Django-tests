@@ -1,0 +1,12 @@
+<html>
+    <head><title>Merchex</title></head>
+    <body>
+        <h1>Hello Django !</h1>
+        <p>Mes listings sont :<p>
+            <ul>
+                {% for listing in listings %}
+                <li>{{listing.title}}</li>
+                {% endfor %}
+            </ul>
+    </body>
+</html>
