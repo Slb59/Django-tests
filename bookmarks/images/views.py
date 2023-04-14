@@ -11,7 +11,7 @@ def image_create(request):
         form = ImageCreateForm(data=request.POST)
         if form.is_valid():
             # form data is valid
-            cd = form.cleaned_data
+            # cd = form.cleaned_data
             new_image = form.save(commit=False)
             # assign current user to the item
             new_image.user = request.user
@@ -23,5 +23,6 @@ def image_create(request):
         # build form with data provided by the bookmarklet via GET
         form = ImageCreateForm(data=request.GET)
     return render(
-        request, "images/image/create.html", {"section": "images", "form": form}
+        request,
+        "images/image/create.html", {"section": "images", "form": form}
     )
