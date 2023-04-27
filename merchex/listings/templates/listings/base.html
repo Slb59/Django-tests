@@ -4,6 +4,9 @@
     <link rel="stylesheet" href="{% static "css/base.css" %}" />
 
     <body>
+        <nav>
+            <a href="{% url 'listings:band-list' %}">Groupes</a>
+        </nav>
 
         {% block content %}{% endblock %}
 
