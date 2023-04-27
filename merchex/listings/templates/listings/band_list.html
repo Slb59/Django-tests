@@ -4,6 +4,7 @@
 
 
 <h1>Mes groupes préférés sont :</h1>
+<a href="{% url 'listings:band-create' %}">Créer un nouveau groupe</a>
 <ul>
     {% for band in bands %}
     <li><a href="{% url 'listings:band-detail' band.id %}">{{ band.name }}</a></li>

@@ -6,6 +6,9 @@
     <body>
         <nav>
             <a href="{% url 'listings:band-list' %}">Groupes</a>
+            <a href="{% url 'listings:listings' %}">Liste</a>
+            <a href="{% url 'listings:about_us' %}">A propos</a>
+            <a href="{% url 'listings:contact' %}">Contactez-nous</a>
         </nav>
 
         {% block content %}{% endblock %}
