@@ -20,7 +20,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-7$(ur89i#dg_xm2+rji9iw!jp88^tl91g@w_(m5#4qs7je(wc2"
+SECRET_KEY = "django-insecure-7$(ur89i#dg_xm2+" \
+    + "rji9iw!jp88^tl91g@w_(m5#4qs7je(wc2"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,7 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "authentification",
+    "authentication",
     "blog",
 ]
 
@@ -56,7 +57,7 @@ ROOT_URLCONF = "fotoblog.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR.joinpath('templates')],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -88,16 +89,20 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        "NAME": "django.contrib.auth.password_validation."
+        + "UserAttributeSimilarityValidator",
     },
     {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+        "NAME": "django.contrib.auth.password_validation"
+        + "MinimumLengthValidator",
     },
     {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+        "NAME": "django.contrib.auth.password_validation."
+        + "CommonPasswordValidator",
     },
     {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+        "NAME": "django.contrib.auth.password_validation."
+        + "NumericPasswordValidator",
     },
 ]
 
@@ -105,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "fr-fr"
 
 TIME_ZONE = "UTC"
 
@@ -123,3 +128,5 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+AUTH_USER_MODEL = 'authentication.User'
