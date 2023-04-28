@@ -77,3 +77,34 @@ def band_create(request):
     return render(request,
                   'listings/band_create.html',
                   {'form': form})
+
+
+def band_update(request, id):
+    band = Band.objects.get(id=id)
+    if request.method == 'POST':
+        form = BandForm(request.POST, instance=band)
+        if form.is_valid():
+            # mettre à jour le groupe existant dans la base de données
+            form.save()
+            # rediriger vers la page détaillée du groupe
+            # que nous venons de mettre à jour
+            return redirect('listings:band-detail', band.id)
+    else:
+        form = BandForm(instance=band)
+    return render(request,
+                  'listings/band_update.html',
+                  {'form': form})
+
+
+def band_delete(request, id): 
+    band = Band.objects.get(id=id)
+
+    if request.method == 'POST':
+        # supprimer le groupe de la base de données
+        band.delete()
+        # rediriger vers la liste des groupes
+        return redirect('listings:band-list')
+    
+    return render(request,
+                  'listings/band_delete.html',
+                  {'band': band})

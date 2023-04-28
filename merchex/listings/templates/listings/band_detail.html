@@ -13,7 +13,7 @@
     </ul>
 
     <p>{{ band.biography }}</p>
-
+    <a href="{% url 'listings:band-update' band.id %}">Modifier ce groupe</a>
     <a href="{% url 'listings:band-list' %}">Retour à tous les groupes</a>
 
 {% endblock %}
