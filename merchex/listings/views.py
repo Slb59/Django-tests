@@ -31,10 +31,10 @@ def about(request):
     return render(request, 'listings/about.html')
 
 
-def contact(request):    
+def contact(request):
 
     if request.method == 'POST':
-        form = ContactUsForm(request.POST)        
+        form = ContactUsForm(request.POST)
 
         if form.is_valid():
             subject = 'Message from '
@@ -46,7 +46,7 @@ def contact(request):
                 from_email=form.cleaned_data['email'],
                 recipient_list=['admin@merchex.xyz'],
             )
-        return redirect('listings:email-sent') 
+        return redirect('listings:email-sent')
     else:
         form = ContactUsForm()  # ajout d’un nouveau formulaire ici
 
@@ -96,7 +96,7 @@ def band_update(request, id):
                   {'form': form})
 
 
-def band_delete(request, id): 
+def band_delete(request, id):
     band = Band.objects.get(id=id)
 
     if request.method == 'POST':
@@ -104,7 +104,7 @@ def band_delete(request, id):
         band.delete()
         # rediriger vers la liste des groupes
         return redirect('listings:band-list')
-    
+
     return render(request,
                   'listings/band_delete.html',
                   {'band': band})
