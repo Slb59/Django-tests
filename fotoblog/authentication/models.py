@@ -13,7 +13,7 @@ class User(AbstractUser):
         (SUBSCRIBER, 'Abonné'),
     )
 
-    account_number = models.CharField(max_length=10, unique=True)
+    # account_number = models.CharField(max_length=10, unique=True)
     profile_photo = models.ImageField(verbose_name='Photo de profil')
     role = models.CharField(max_length=30,
                             choices=ROLE_CHOICES,
