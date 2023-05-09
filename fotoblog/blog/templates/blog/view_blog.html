@@ -4,5 +4,6 @@
     <p><a href="{% url 'edit_blog' blog.id %}">Modifier le billet</a></p>
     <img src="{{ blog.photo.image.url }}">
     <p>{{ blog.photo.caption }}</p>
+    <p>Nombre de mots dans le post: {{ blog.word_count }}</p>
     <p>{{ blog.content }}</p>
 {% endblock content %}

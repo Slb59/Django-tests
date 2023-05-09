@@ -88,5 +88,5 @@ def create_multiple_photos(request):
                     photo.uploader = request.user
                     photo.save()
             return redirect('home')
-    return render(request, 'blog/create_multiple_photos.html', {'formset':formset})
- 
+    return render(request, 'blog/create_multiple_photos.html',
+                  {'formset': formset})
