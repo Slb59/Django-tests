@@ -1,6 +1,8 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required, permission_required
 from django.forms import formset_factory
+from django.views.generic import View
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from . import forms, models
 
 
@@ -59,6 +61,41 @@ def blog_and_photo_upload(request):
                'photo_form': photo_form,
                }
     return render(request, 'blog/create_blog_post.html', context=context)
+
+
+class BlogAndPhotoUploadView(LoginRequiredMixin,
+                             PermissionRequiredMixin, View):
+    permission_required = ['blog.add_photo', 'blog.add_blog']
+    blog_form_class = forms.BlogForm
+    photo_form_class = forms.PhotoForm
+    template_name = 'blog/create_blog_post.html'
+
+    def get(self, request):
+        blog_form = self.blog_form_class()
+        photo_form = self.photo_form_class()
+        context = {'blog_form': blog_form,
+                   'photo_form': photo_form,
+                   }
+        return render(request, 'blog/create_blog_post.html', context=context)
+
+    def post(self, request):
+        blog_form = self.blog_form_class(request.POST)
+        photo_form = self.photo_form_class(request.POST, request.FILES)
+        if all([blog_form.is_valid(), photo_form.is_valid()]):
+            photo = photo_form.save(commit=False)
+            photo.uploader = request.user
+            photo.save()
+            blog = blog_form.save(commit=False)
+            blog.author = request.user
+            blog.photo = photo
+            blog.save()
+            return redirect('home')
+        else:
+            context = {'blog_form': blog_form,
+                       'photo_form': photo_form,
+                       }
+            return render(request, 'blog/create_blog_post.html',
+                          context=context)
 
 
 @login_required
