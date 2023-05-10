@@ -40,27 +40,27 @@ def home(request):
                   context={'photos': photos, 'blogs': blogs})
 
 
-@login_required
-@permission_required(['blog.add_photo', 'blog.add_blog'])
-def blog_and_photo_upload(request):
-    blog_form = forms.BlogForm()
-    photo_form = forms.PhotoForm()
-    if request.method == 'POST':
-        blog_form = forms.BlogForm(request.POST)
-        photo_form = forms.PhotoForm(request.POST, request.FILES)
-        if all([blog_form.is_valid(), photo_form.is_valid()]):
-            photo = photo_form.save(commit=False)
-            photo.uploader = request.user
-            photo.save()
-            blog = blog_form.save(commit=False)
-            blog.author = request.user
-            blog.photo = photo
-            blog.save()
-            return redirect('home')
-    context = {'blog_form': blog_form,
-               'photo_form': photo_form,
-               }
-    return render(request, 'blog/create_blog_post.html', context=context)
+# @login_required
+# @permission_required(['blog.add_photo', 'blog.add_blog'])
+# def blog_and_photo_upload(request):
+#     blog_form = forms.BlogForm()
+#     photo_form = forms.PhotoForm()
+#     if request.method == 'POST':
+#         blog_form = forms.BlogForm(request.POST)
+#         photo_form = forms.PhotoForm(request.POST, request.FILES)
+#         if all([blog_form.is_valid(), photo_form.is_valid()]):
+#             photo = photo_form.save(commit=False)
+#             photo.uploader = request.user
+#             photo.save()
+#             blog = blog_form.save(commit=False)
+#             blog.author = request.user
+#             blog.photo = photo
+#             blog.save()
+#             return redirect('home')
+#     context = {'blog_form': blog_form,
+#                'photo_form': photo_form,
+#                }
+#     return render(request, 'blog/create_blog_post.html', context=context)
 
 
 class BlogAndPhotoUploadView(LoginRequiredMixin,
@@ -89,6 +89,9 @@ class BlogAndPhotoUploadView(LoginRequiredMixin,
             blog.author = request.user
             blog.photo = photo
             blog.save()
+            blog.contributors.add(
+                request.user,
+                through_defaults={'contribution': 'Auteur principal'})
             return redirect('home')
         else:
             context = {'blog_form': blog_form,
