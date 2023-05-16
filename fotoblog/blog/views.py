@@ -1,8 +1,11 @@
+from itertools import chain
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required, permission_required
 from django.forms import formset_factory
 from django.views.generic import View
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.db.models import Q
 from . import forms, models
 
 
@@ -34,8 +37,16 @@ def photo_upload(request):
 
 @login_required
 def home(request):
-    photos = models.Photo.objects.all()
-    blogs = models.Blog.objects.all()
+
+    blogs = models.Blog.objects.filter(
+        Q(contributors__in=request.user.follows.all()) |
+        Q(starred=True)
+    )
+
+    photos = models.Photo.objects.filter(
+        uploader__in=request.user.follows.all()
+    ).exclude(blog__in=blogs)
+
     return render(request, 'blog/home.html',
                   context={'photos': photos, 'blogs': blogs})
 

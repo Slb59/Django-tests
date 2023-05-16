@@ -1,6 +1,6 @@
 from django.db import models
 
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, Group
 
 
 class User(AbstractUser):
@@ -25,4 +25,11 @@ class User(AbstractUser):
         verbose_name='suit',
     )
 
-
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if self.role == self.CREATOR:
+            group = Group.objects.get(name='creators')
+            group.user_set.add(self)
+        elif self.role == self.SUBSCRIBER:
+            group = Group.objects.get(name='subscribers')
+            group.user_set.add(self)
