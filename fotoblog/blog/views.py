@@ -39,16 +39,25 @@ def photo_upload(request):
 def home(request):
 
     blogs = models.Blog.objects.filter(
-        Q(contributors__in=request.user.follows.all()) |
-        Q(starred=True)
+        Q(contributors__in=request.user.follows.all()) | Q(starred=True)
     )
 
     photos = models.Photo.objects.filter(
         uploader__in=request.user.follows.all()
     ).exclude(blog__in=blogs)
 
+    blogs_and_photos = sorted(
+        chain(blogs, photos),
+        key=lambda instance: instance.date_created,
+        reverse=True
+    )
+
+    context = {
+        'blogs_and_photos': blogs_and_photos,
+    }
+
     return render(request, 'blog/home.html',
-                  context={'photos': photos, 'blogs': blogs})
+                  context=context)
 
 
 # @login_required
