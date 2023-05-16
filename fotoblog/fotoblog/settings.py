@@ -89,7 +89,17 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
+        'NAME': "django.contrib.auth.password_validation."
+        + "MinimumLengthValidator",
+        'OPTIONS': {
+            'min_length': 8,
+        }
+    },
+    {
         'NAME': 'authentication.validators.ContainsLetterValidator',
+    },
+    {
+        'NAME': 'authentication.validators.ContainsNumberValidator',
     },
 ]
 
@@ -101,9 +111,11 @@ LANGUAGE_CODE = "fr-fr"
 
 TIME_ZONE = "UTC"
 
-USE_I18N = True
+USE_I18N = True  # active the language_code setting
 
-USE_TZ = True
+USE_L10N = True  # date format
+
+USE_TZ = True  # set the default time zone
 
 
 # Static files (CSS, JavaScript, Images)
