@@ -2,8 +2,9 @@
 {% load blog_extras %}
 {% block content %}
     <div class="grid-container">
-        {% for instance in photos %}
+        {% for instance in page_obj %}
             {% include 'blog/partials/photo_snippet.html' %}
         {% endfor %}
     </div>
+    {% include 'blog/partials/paginator.html' %}
 {% endblock content %}

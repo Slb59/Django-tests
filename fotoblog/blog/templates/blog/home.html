@@ -3,7 +3,7 @@
 {% block content %}
     <p>Vous êtes connecté !</p>
     <div class="grid-container">
-        {% for instance in blogs_and_photos %}
+        {% for instance in page_obj %}
             {% if instance|model_type == 'Blog' %}
                 <div class="post">
                     <a href="{% url 'view_blog' instance.id %}">
@@ -18,4 +18,5 @@
             {% endif %}
         {% endfor %}
     </div>
+    {% include 'blog/partials/paginator.html' %}
 {% endblock content %}
