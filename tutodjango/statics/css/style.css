@@ -1,3 +1,7 @@
+html {
+  background: white url("assets/bg.png") no-repeat;
+}
+
 li a {
   color: green;
 }
