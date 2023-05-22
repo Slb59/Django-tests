@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "tutodjango",
-    "polls",
+    "tutodjango.apps.TutodjangoConfig",
+    "polls.apps.PollsConfig",
 ]
 
 MIDDLEWARE = [
