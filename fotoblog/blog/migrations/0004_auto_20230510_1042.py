@@ -4,11 +4,11 @@ from django.db import migrations
 
 
 def author_to_contributors(apps, schema_migration):
-    Blog = apps.get_model('blog', 'Blog')
+    Blog = apps.get_model("blog", "Blog")
     for blog in Blog.objects.all():
         blog.contributors.add(
-            blog.author,
-            through_defaults={'contribution': 'Auteur principal'})
+            blog.author, through_defaults={"contribution": "Auteur principal"}
+        )
 
 
 class Migration(migrations.Migration):

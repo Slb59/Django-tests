@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+
 # from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import ListView
 
@@ -19,8 +20,7 @@ def post_share(request, post_id):
     # ... send email
     else:
         form = EmailPostForm()
-    return render(request, "blog/post/share.html",
-                  {"post": post, "form": form})
+    return render(request, "blog/post/share.html", {"post": post, "form": form})
 
 
 class PostListView(ListView):

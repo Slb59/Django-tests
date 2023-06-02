@@ -7,13 +7,14 @@ from django import forms
 class SignupForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = get_user_model()
-        fields = ('username', 'email', 'first_name', 'last_name', 'role')
+        fields = ("username", "email", "first_name", "last_name", "role")
 
 
 class UploadProfilePhotoForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
-        fields = ('profile_photo', )
+        fields = ("profile_photo",)
+
 
 # class LoginForm(forms.Form):
 #     username = forms.CharField(max_length=63, label='Nom d’utilisateur')

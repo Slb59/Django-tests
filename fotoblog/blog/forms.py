@@ -8,7 +8,7 @@ User = get_user_model()
 class PhotoForm(forms.ModelForm):
     class Meta:
         model = models.Photo
-        fields = ['image', 'caption']
+        fields = ["image", "caption"]
 
 
 class BlogForm(forms.ModelForm):
@@ -16,7 +16,7 @@ class BlogForm(forms.ModelForm):
 
     class Meta:
         model = models.Blog
-        fields = ['title', 'content']
+        fields = ["title", "content"]
 
 
 class DeleteBlogForm(forms.Form):
@@ -26,4 +26,4 @@ class DeleteBlogForm(forms.Form):
 class FollowUsersForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['follows']
+        fields = ["follows"]

@@ -9,4 +9,3 @@ class UserAdmin(admin.ModelAdmin):
     # search_fields = ["title", "description"]
     # ordering = ["user", "time_created"]
     # raw_id_fields = ["user"]
-

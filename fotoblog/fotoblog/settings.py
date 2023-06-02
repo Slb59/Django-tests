@@ -20,8 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-7$(ur89i#dg_xm2+" \
-    + "rji9iw!jp88^tl91g@w_(m5#4qs7je(wc2"
+SECRET_KEY = "django-insecure-7$(ur89i#dg_xm2+" + "rji9iw!jp88^tl91g@w_(m5#4qs7je(wc2"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -57,7 +56,7 @@ ROOT_URLCONF = "fotoblog.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR.joinpath('templates')],
+        "DIRS": [BASE_DIR.joinpath("templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -89,17 +88,16 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': "django.contrib.auth.password_validation."
-        + "MinimumLengthValidator",
-        'OPTIONS': {
-            'min_length': 8,
-        }
+        "NAME": "django.contrib.auth.password_validation." + "MinimumLengthValidator",
+        "OPTIONS": {
+            "min_length": 8,
+        },
     },
     {
-        'NAME': 'authentication.validators.ContainsLetterValidator',
+        "NAME": "authentication.validators.ContainsLetterValidator",
     },
     {
-        'NAME': 'authentication.validators.ContainsNumberValidator',
+        "NAME": "authentication.validators.ContainsNumberValidator",
     },
 ]
 
@@ -122,18 +120,18 @@ USE_TZ = True  # set the default time zone
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
-STATICFILES_DIRS = [BASE_DIR.joinpath('static/')]
+STATICFILES_DIRS = [BASE_DIR.joinpath("static/")]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-AUTH_USER_MODEL = 'authentication.User'
+AUTH_USER_MODEL = "authentication.User"
 
-LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_URL = "login"
+LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = LOGIN_URL
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR.joinpath('media/')
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR.joinpath("media/")

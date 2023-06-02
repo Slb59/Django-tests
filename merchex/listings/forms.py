@@ -12,4 +12,4 @@ class BandForm(forms.ModelForm):
     class Meta:
         model = Band
         # fields = '__all__'
-        exclude = ('active', 'official_homepage')
+        exclude = ("active", "official_homepage")
